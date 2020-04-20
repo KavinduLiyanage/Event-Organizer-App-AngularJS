@@ -45,7 +45,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Time</span>
           </div>
-          <input type="time" ng-model="eventTime" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          <input type="time" ng-model="eventTime" ng-change="changedTime()"class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
       </form>
 
@@ -110,13 +110,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="item in EventList | orderBy:'date&&time' |  filter:calFormatedDate">
+      <tr ng-repeat="item in EventList | orderBy:'time'&&'date' |  filter:calFormatedDate">
         <td>{{item.name}}</td>
         <td>{{item.date}}</td>
-        <td>{{item.time}}</td>
+        <td>{{item.timeformated}}</td>
         <td>
           <button class="btn btn-primary" ng-click="editClickHandler(item)">Edit</button>
-          <button class="btn btn-danger" ng-click="removeClickHandler(item)">Remove</button>
+          <button class="btn btn-danger" ng-click="removeClickHandler(item.id)">Remove</button>
           <button class="btn btn-danger" ng-click="getTimeClickHandler(item)">Time</button>
         </td>
       </tr>

@@ -12,7 +12,8 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
       id:$scope.EventList.length + 1,
       name:$scope.eventName,
       date:$scope.eventDateFormated,
-      time:$scope.eventDate
+      time:$scope.eventTime,
+      timeformated:$scope.eventTimeFormated
     };
 
     $scope.EventList.push(Event);
@@ -23,6 +24,7 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
   $scope.removeClickHandler = function (item) {
 
     var index = $scope.EventList.indexOf(item);
+    $log.log( 'sdate :' + item);
 
     $scope.EventList.splice(index,1);
 
@@ -47,15 +49,20 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
 
         e.name=$scope.eventName;
         e.date=$scope.eventDateFormated;
-        e.time=$scope.eventDate;
+        e.time=$scope.eventTime;
+        e.timeformated=$scope.eventTimeFormated;
       }
     });
+
+    $scope.ClearForm();
   };
 
 
   //Clear form
   $scope.ClearForm = function () {
     $scope.eventName = "";
+    $scope.eventDate = new Date();
+    $scope.eventTime = "";
     $scope.calendarDate = "";
     $scope.calFormatedDate = "";
 
@@ -64,6 +71,8 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
 
   $scope.getTimeClickHandler = function(item) {
     $interval(function () {
+
+
 
       //$log.log('Date now: ' + Date.now());
       var sdate = item.time;
@@ -74,7 +83,7 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
       var dif = sdate-start;
       //let sdate2 = sdate.ge;
 
-      $log.log( 'sdate :' + sdate);
+
 
       $log.log( '$scope.fuck2 :' + $scope.fuck2);
 
@@ -99,7 +108,7 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
   //Calendar Date convert
   $scope.calendarDate="";
   $scope.calFormatedDate="";
-  $scope.changedDate=function(){/*Calendar change function */
+  $scope.changedDate=function(){
     if($scope.calendarDate){
       $scope.calFormatedDate=moment($scope.calendarDate).format('LL');
     }
@@ -107,10 +116,20 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
 
   //DatePicker Date convert
   $scope.eventDate=new Date();
-  $scope.eventDateFormated=moment($scope.eventDate).format('LL');
-  $scope.changedDate2=function(){/*Calendar change function */
+  $scope.eventDateFormated=moment($scope.eventDate).format('dddd, MMMM D, YYYY');
+  $scope.changedDate2=function(){
     if($scope.eventDate){
-      $scope.eventDateFormated=moment($scope.eventDate).format('LL');
+      $scope.eventDateFormated=moment($scope.eventDate).format('dddd, MMMM D, YYYY');
+    }
+  };
+
+
+  //TimePicker Time convert
+
+  $scope.eventTimeFormated=moment($scope.eventTime).format('LT');
+  $scope.changedTime=function(){
+    if($scope.eventTime){
+      $scope.eventTimeFormated=moment($scope.eventTime).format('LT');
     }
   };
 });
