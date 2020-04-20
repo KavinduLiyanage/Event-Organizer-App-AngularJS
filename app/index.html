@@ -11,28 +11,25 @@
   <!-- Material CSs -->
   <link rel="stylesheet" href="https://gitcdn.xyz/cdn/angular/bower-material/v1.1.22-rc.0/angular-material.css" />
 
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" /> -->
-  <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
-
-  <!-- Small-->
-  <!-- <link rel="stylesheet" href="https://material.angularjs.org/1.1.22-rc.0/docs.css" /> -->
-
 </head>
 <body>
-<h2 class="text-center text-muted">Online Organizer</h2>
+<h1 class=" text-muted text-center" ><span class="badge  badge-info" >Online Organizer</span></h1>
+
 <div class="container" ng-controller="MainCtrl as main" >
   <div class="row">
 
     <!--Add new event form-->
-    <div class="col-sm" >
-      <h3 class="text-center text-muted">Add New Event</h3>
+    <div class="col"  >
+      <h4 class="text-center text-muted">Add New Event</h4>
+      <br>
       <form>
         <div class="input-group input-group-sm mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Event Name</span>
           </div>
           <input type="text" ng-model="eventName" class="form-control" placeholder="Type Here" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        </div>
+        </div><br>
+
         <div class="input-group input-group-sm mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Date</span>
@@ -40,63 +37,55 @@
           <div flex-gt-xs>
             <md-datepicker ng-model="eventDate" ng-change="changedDate2()" ></md-datepicker>
           </div>
-        </div>
+        </div><br>
         <div class="input-group input-group-sm mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Time</span>
           </div>
           <input type="time" ng-model="eventTime" ng-change="changedTime()"class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        </div>
+        </div><br>
       </form>
 
-      <div>
-        <div >
-          <button class="btn btn-primary btn-lg btn-block" ng-click="addClickHandler()">Add New</button>
-          <button class="btn btn-primary btn-lg btn-block" ng-click="updateClickHandler()">Changes Save</button>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-success  btn-block" ng-click="addClickHandler()">Add New</button>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary  btn-block" ng-click="updateClickHandler()">Save Changes</button>
+        </div>
+        <div class="col">
           <button class="btn btn-secondary btn-block" ng-click="ClearForm()">Clear Form</button>
         </div>
       </div>
+      <br>
+      <div class="text-xl-left">
+        <h3 class="text-xl-left text-muted text-center" ><span class="badge  badge-info" >Remain Time {{rDays}}:{{rHours}}:{{rMinutes}}:{{rSeconds}}</span></h3>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="text-xl-left">
+            <h3 class="text-xl-left text-muted text-center" ><span class="badge  badge-warning" >Daily Events of {{calFormatedDate}}</span></h3>
+          </div>
+        </div>
+        <div class="col">
+          <button class="btn btn-secondary btn" ng-click="ClearDate()">Clear Date</button>
+        </div>
+      </div>
+
+    </div>
+    <div>
 
     </div>
 
     <!--Calendar-->
-    <div class="col-sm">
-      <h3 class=" text-muted">Event Calendar</h3>
-      <h5>Select Date to see Daily Events  </h5>
+    <div class="col">
+      <h4 class=" text-muted">Event Calendar</h4>
+      <p>Select Date to see Daily Events  </p>
       <md-calendar class="calandar" ng-model="calendarDate" ng-change="changedDate()" ></md-calendar>
     </div>
   </div>
-  <div>
-    <span class="badge  badge-success" >Daily Events of {{calFormatedDate}}</span>
-  </div>
-  <h2 class="text-center text-muted">Event List</h2>
-  <div class="row">
 
-    <!--Event Selected-->
-    <div class="col-sm">
-      <div class="input-group input-group-sm mb-3 align-right">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Selected Date</span>
-        </div>
-        <input type="text" ng-model="main.event.value" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-      </div>
-    </div>
-
-    <!--Event Search-->
-    <div class="col-sm">
-      <div class="input-group input-group-sm mb-3 align-right">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Search by Event Name</span>
-        </div>
-        <input type="text" ng-model="main.search" class="form-control" placeholder="Type Here" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-      </div>
-    </div>
-
-    <!--Event Remaining Time-->
-    <div class="col-sm">
-      <h3 class="text-center text-muted">{{rDays}}:{{rHours}}:{{rMinutes}}:{{rSeconds}}</h3>
-    </div>
-  </div>
+  <h3 class="text-center text-muted">Event List</h3>
 
   <!--Event List-->
   <div class="row table-responsive" >

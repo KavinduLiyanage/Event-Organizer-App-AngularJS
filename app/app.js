@@ -68,6 +68,15 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
 
   };
 
+  //Clear selected date
+  $scope.ClearDate = function () {
+
+    $scope.calendarDate = "";
+    $scope.calFormatedDate = "";
+
+
+  };
+
 
   $scope.getTimeClickHandler = function(item) {
     $interval(function () {
