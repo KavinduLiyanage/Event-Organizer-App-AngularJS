@@ -12,20 +12,20 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
       id:$scope.EventList.length + 1,
       name:$scope.eventName,
       date:$scope.eventDateFormated,
+      dateformated:$scope.eventDate,
       time:$scope.eventTime,
       timeformated:$scope.eventTimeFormated
     };
 
     $scope.EventList.push(Event);
     $scope.ClearForm();
+
   };
 
   //Remove Event
   $scope.removeClickHandler = function (item) {
 
     var index = $scope.EventList.indexOf(item);
-    $log.log( 'sdate :' + item);
-
     $scope.EventList.splice(index,1);
 
   };
@@ -65,7 +65,6 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
     $scope.eventTime = "";
     $scope.calendarDate = "";
     $scope.calFormatedDate = "";
-
   };
 
   //Clear selected date
@@ -73,44 +72,6 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
 
     $scope.calendarDate = "";
     $scope.calFormatedDate = "";
-
-
-  };
-
-
-  $scope.getTimeClickHandler = function(item) {
-    $interval(function () {
-
-
-
-      //$log.log('Date now: ' + Date.now());
-      var sdate = item.time;
-      $scope.fuck1=moment(sdate).toNow();
-      $scope.fuck2=moment().toDate();;
-      var start = new Date();
-
-      var dif = sdate-start;
-      //let sdate2 = sdate.ge;
-
-
-
-      $log.log( '$scope.fuck2 :' + $scope.fuck2);
-
-      $log.log( 'dif :' + dif);
-
-      let expireDate = 18374 * 24 * 60 * 60;
-      $log.log('Date exp: ' + expireDate);
-      let nTime = Math.floor(Date.now() / 1000);
-      $log.log('Date nTi: ' + nTime);
-      let remaining = dif/1000;
-      $log.log('remaining: ' + remaining);
-
-      $scope.rDays = parseInt(remaining/60/60/24);
-      $scope.rHours = parseInt((remaining-($scope.rDays*60*60*24))/60/60);
-      $scope.rMinutes = parseInt((remaining-($scope.rDays*60*60*24)-($scope.rHours*60*60))/60);
-      $scope.rSeconds = parseInt(remaining-($scope.rDays*60*60*24)-($scope.rHours*60*60)-($scope.rMinutes*60));
-
-    },1000);
   };
 
 
@@ -132,13 +93,33 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
     }
   };
 
-
-  //TimePicker Time convert
-
   $scope.eventTimeFormated=moment($scope.eventTime).format('LT');
   $scope.changedTime=function(){
     if($scope.eventTime){
       $scope.eventTimeFormated=moment($scope.eventTime).format('LT');
     }
   };
+
+
+  $interval(function () {
+
+    var edate = Math.floor(Date.now() / 1000);
+    var time2formated = moment(edate).format('k');
+    var timecal = time2formated*60*60*1000;
+    var start = Math.floor(Date.now() / 1000);
+    var Datedif = edate-start;
+    var dateandtimedif = Datedif+timecal;
+    let remaining = Datedif/1000;
+
+    $scope.rDays = parseInt(remaining/60/60/24);
+    $scope.rHours = parseInt((remaining-($scope.rDays*60*60*24))/60/60);
+    $scope.rMinutes = parseInt((remaining-($scope.rDays*60*60*24)-($scope.rHours*60*60))/60);
+    $scope.rSeconds = parseInt(remaining-($scope.rDays*60*60*24)-($scope.rHours*60*60)-($scope.rMinutes*60));
+
+  },1000);
+
+
+  //TimePicker Time convert
+
+
 });
