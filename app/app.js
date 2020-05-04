@@ -63,8 +63,6 @@ app.controller('MainCtrl',function ($scope,$interval,$log) {
     $scope.eventName = "";
     $scope.eventDate = new Date();
     $scope.eventTime = "";
-    $scope.calendarDate = "";
-    $scope.calFormatedDate = "";
   };
 
   //Clear selected date
